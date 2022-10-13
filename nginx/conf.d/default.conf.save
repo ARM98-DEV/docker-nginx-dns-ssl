@@ -1,0 +1,48 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name khooshak.com ;
+   
+     location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://khooshak.com$request_uri;
+    }
+
+}
+
+
+
+
+server {
+    listen 443  ssl http2;
+    listen [::]:443 ssl http2;
+    server_name khooshak.com;
+
+    ssl_certificate /etc/nginx/ssl/live/khooshak.com/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/live/khooshak.com/privkey.pem;
+
+
+   location /static/{
+        alias /app/static/;
+    }
+
+    location /media/{
+        alias /app/media/;
+    }
+   # proxy_read_timeout 6000s;
+   # client_max_body_size 100M;
+   # client_header_buffer_size 512k;
+   # large_client_header_buffers 4 512k;
+   # client_body_timeout 3000s;
+    location / {
+	proxy_pass 
+#        root /usr/share/nginx/html/khooshak.com;
+#        index index.html;
+
+
+}
+}
+

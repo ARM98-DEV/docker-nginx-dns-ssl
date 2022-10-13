@@ -1,0 +1,47 @@
+services:
+
+  bind:
+    image: 'pstauffer/bind:stable'
+    container_name: 'bind'
+
+    ports:
+      - 53:53/udp
+      - 53:53/tcp
+    volumes:
+     - ./bindconfig:/etc/bind
+     - /var/log/named:/var/log/named
+
+    restart: always
+
+  nginx:
+    build:
+      context: ./nginx/
+    restart: on-failure
+    depends_on:
+       - app
+       - bind
+    networks:
+      - main
+
+    ports:
+      - 80:80
+      - 443:443
+
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/html/:/usr/share/nginx/html/
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/
+    depends_on:
+      - bind
+
+
+networks:
+  main:
+
