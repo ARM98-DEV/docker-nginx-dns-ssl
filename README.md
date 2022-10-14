@@ -3,7 +3,7 @@
 
 -----------
 
-- [internal server](#internal server)
+- [internal server](#internal-server)
   - [git clone](#step-1)
   - [install nginx](#step-2)
   - [run docker-compose](#step-3)
@@ -12,7 +12,7 @@
   - [restart docker-compose ](#step-5)
 -----
 
-#internal server
+# internal server
 
 ## step 1:
 
