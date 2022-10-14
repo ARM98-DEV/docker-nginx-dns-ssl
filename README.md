@@ -1,7 +1,6 @@
 
 # v2ray-docker-nginx-dns
 
------------
 
 - [internal server](#internal-server)
   - [git clone](#step-1)
