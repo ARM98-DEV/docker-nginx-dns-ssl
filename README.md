@@ -1,10 +1,9 @@
 
-#v2ray-docker-nginx-dns
+# v2ray-docker-nginx-dns
 
 -----------
 
 - [internal server](#internal server)
-
   - [git clone](#step-1)
   - [install nginx](#step-2)
   - [run docker-compose](#step-3)
@@ -15,7 +14,7 @@
 
 #internal server
 
-##step 1
+## step 1:
 
 ```console
 git clone https://github.com/ahmadrezamansuory/docker-nginx-dns-ssl
@@ -24,7 +23,7 @@ cd docker-nginx-dns-ssl/
 
 -----
 
-## step 2 :
+## step 2:
 
 ```bash
 docker pull sameersbn/bind:latest
@@ -34,7 +33,7 @@ docker pull sameersbn/bind:latest
 
 ### edit  `./bindconfig/named.conf`
 
-## step 3 :
+## step 3:
 
 ### pull image nginx
 
@@ -42,11 +41,11 @@ docker pull sameersbn/bind:latest
 docker pull nginx:latest
 ```
 
-###edit `./nginx/conf.d/default.conf`
+### edit `./nginx/conf.d/default.conf`
 
 -----
 
-## step 3:
+## step 4:
 
 ## run docekr compose
 
@@ -54,7 +53,7 @@ docker pull nginx:latest
 docker-compose up -d
 ```
 
-## step 4:
+## step 5:
 
 ### run certbot:
 
@@ -66,7 +65,7 @@ docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
 docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d --dry-run -d example.com
 ```
 ### check `./data/certbot/conf/live/` must directory with your domain created
-## step 5:
+## step 6:
 
 ###edit `./nginx/conf.d/default.conf` and remove comment line and edit example.com in there
 
@@ -74,8 +73,7 @@ docker-compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
  ssl_certificate /etc/nginx/ssl/live/exampel.com/fullchain.pem;
  ssl_certificate_key /etc/nginx/ssl/live/exampel.com/privkey.pem;
 ```
-## step 6:
+## step 7:
 ```bash
 docker-compose restart 
 ```
->>>>>>> 92cffd6 (Update README.md)
